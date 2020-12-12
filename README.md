@@ -19,4 +19,6 @@ Kitaplar API ücretsiz key vermektedir ancak aylık 100 istek hakkı sunmaktadı
 * Proje kullanıcıların kitapları sorgulayabildiği online bir kütüphane olacak.
 * Aradıkları kitapla ilgili detaylı bilgiler edinilebilecek.
 * API'ın sunduğu bilgileri kullanıcıya sunacak.
-* Kitabı almak isteyen olursa [Hattusa](hattusa.live) linkine yönlendirebilir.
+* Kitabı almak isteyen olursa API'ın izin verdiği kadar epub olarak indirilebilir veya [Hattusa](hattusa.live) linkine yönlendirebilir.
+
+Kalanı için issuelara bakabilirsiniz :)
