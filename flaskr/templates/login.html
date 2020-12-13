@@ -12,10 +12,9 @@
 <hr>
 
 <form method="POST">
-
+    {{ form.csrf_token }}
     {{ render_field(form.email, class="form-control") }}
     {{ render_field(form.password, class="form-control") }}
-
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
 

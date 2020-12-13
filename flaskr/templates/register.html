@@ -12,14 +12,12 @@
 <hr>
 
 <form method="POST">
-
+    {{ form.csrf_token }}
     {{ render_field(form.name, class="form-control") }}
     {{ render_field(form.email, class="form-control") }}
     {{ render_field(form.password, class="form-control") }}
     {{ render_field(form.confirm, class="form-control") }}
     {{ render_field(form.avatar, class="form-control") }}
-
-
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
 
