@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+:root {
+  --text-color: #120e0e;
+  --color-1: #bf5233;
+  --color-2: #35325e;
+}
+
+body {
+  background: url("/assets/illustrations.svg");
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.form-box {
+  display: flex;
+  padding: 25px;
+  border-radius: 10px;
+  background: rgba(223, 223, 223, 0.95);
+  -webkit-box-shadow: 7px 15px 31px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 7px 18px 31px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 7px 18px 31px 0px rgba(0, 0, 0, 0.15);
+  height: 450px;
+  min-width: 350px;
+}
+.form-box h2 {
+  color: var(--text-color);
+  font-family: "Lato", sans-serif;
+}
+
+.form-box .register,
+.login {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+.form-box input {
+  width: 244px;
+  padding: 16px;
+  border: 0;
+  border-radius: 5px;
+  -webkit-box-shadow: 7px 15px 31px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 7px 18px 31px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 7px 18px 31px 0px rgba(0, 0, 0, 0.15);
+}
+.form-box .buttons {
+  display: flex;
+  flex-direction: column;
+}
+.form-box .buttons button:last-child {
+  margin-top: 10px;
+  background: var(--color-2);
+}
+.form-box button {
+  background: var(--color-1);
+  padding: 12px;
+  border: 0;
+  border-radius: 5px;
+  width: 280px;
+  color: white;
+  font-size: 1.2em;
+}
+.form-box a.forget-password {
+  font-family: Lato, sans-serif;
+  margin-top: 10px;
+  text-decoration: none;
+  color: rgb(102, 102, 102);
+}
