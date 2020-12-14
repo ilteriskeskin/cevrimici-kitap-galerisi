@@ -1,6 +1,6 @@
 # Çevrimiçi kitap galerisi
 
-[kitaplar-api](https://collectapi.com/tr/api/book/kitaplar-api), [itbook](https://api.itbook.store/) ya da [Google Books API](https://developers.google.com/books/docs/overview) kullanılarak çevrimiçi kitap galerisi oluşturulacak 
+[kitaplar-api](https://collectapi.com/tr/api/book/kitaplar-api) ya da [Google Books API](https://developers.google.com/books/docs/overview) kullanılarak çevrimiçi kitap galerisi oluşturulacak 
 
 
 **Proje Kurulumu**

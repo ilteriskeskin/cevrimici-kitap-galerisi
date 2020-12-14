@@ -14,6 +14,26 @@
 
 {% if session['logged_in'] %}
     <h5>Welcome, {{session['username'] }}</h5>
+    <form method="POST">
+        {{form.search}}
+        <button type="submit">Search</button>
+        
+    </form>
+    <ul>
+    
+        {% for book in books %}
+            <li>
+            <b>BookName:</b> {{ book.title }}
+            <br>
+            Subtitle: {{ book.subtitle }}
+            <br>
+            <b style="color:gold">{{ book.price }}</b>
+            </li>
+            <br><br>
+    {% endfor %}
+
+    </ul>
+
 {% endif %}
 
 {% endblock body %}
