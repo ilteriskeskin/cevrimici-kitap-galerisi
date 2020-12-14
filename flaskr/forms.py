@@ -11,4 +11,7 @@ class RegisterForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField('enter your email', validators=[DataRequired()])
-    password = StringField('enter your password', validators=[DataRequired()])
+    password = PasswordField('enter your password', validators=[DataRequired()])
+
+class SearchForm(FlaskForm):
+    search = StringField('Search', validators=[DataRequired()])

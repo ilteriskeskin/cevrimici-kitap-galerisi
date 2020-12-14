@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, render_template, redirect, url_for, request, session, flash, json, jsonify
 from models import db, User
-from forms import LoginForm, RegisterForm
+from forms import LoginForm, RegisterForm, SearchForm
 from werkzeug.security import generate_password_hash, check_password_hash
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "MemurBeySelcuk"
@@ -14,18 +15,50 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/')
-def hello():
-    return render_template('index.html')
+@app.route('/',  methods=['GET', 'POST'])
+def home():
+    form = SearchForm()
+    if request.method == "POST":
+        searchVariable = form.search.data
+        searchUrl = 'https://api.itbook.store/1.0/search/'
+        
+        r = requests.get(searchUrl + searchVariable) 
+        result = r.json()
+        books = result['books']
+        return render_template('index.html', form=form, books = books)
 
-@app.route('/login/', methods=['GET','POST'])
+    return render_template('index.html', form = form)
+@app.route('/login/', methods = ['GET', 'POST'])
 def login():
+    # Creating Login form object
     form = LoginForm()
+    # verifying that method is post and form is valid
+    if request.method == 'POST' and form.validate:
+        # checking that user is exist or not by email
+        user = User.query.filter_by(email = form.email.data).first()
 
-    if form.validate_on_submit():
-        return render_template('home.html')
+        if user:
+            # if user exist in database than we will compare our database hased password and password come from login form 
+            if check_password_hash(user.password, form.password.data):
+                # if password is matched, allow user to access and save email and username inside the session
+                flash('You have successfully logged in.', "success")
 
-    return render_template('login.html', form=form)
+                session['logged_in'] = True
+
+                session['email'] = user.email 
+
+            
+                # After successful login, redirecting to home page
+                return redirect(url_for('home'))
+
+            else:
+
+                # if password is in correct , redirect to login page
+                flash('Username or Password Incorrect', "Danger")
+
+                return redirect(url_for('login'))
+    # rendering login page
+    return render_template('login.html', form = form)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
