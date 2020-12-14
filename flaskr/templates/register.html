@@ -6,20 +6,23 @@
 
 <h4>
     <strong>
-        Login
+        Register
     </strong>
 </h4>
 <hr>
 
 <form method="POST">
     {{ form.csrf_token }}
+    {{ render_field(form.name, class="form-control") }}
     {{ render_field(form.email, class="form-control") }}
     {{ render_field(form.password, class="form-control") }}
-    <button type="submit" class="btn btn-primary">Login</button>
+    {{ render_field(form.confirm, class="form-control") }}
+    {{ render_field(form.avatar, class="form-control") }}
+    <button type="submit" class="btn btn-primary">Register</button>
 </form>
 
 <hr>
 
-<a href="/register">Create a New Account!</a>
+<a href="/login">Login into existing account!</a>
 
 {% endblock body %}
