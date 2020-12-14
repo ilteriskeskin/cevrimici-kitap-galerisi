@@ -23,7 +23,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        print('YOU LOGGED IN FINALLY DAMMIT')
+        return render_template('home.html')
 
     return render_template('login.html', form=form)
 
