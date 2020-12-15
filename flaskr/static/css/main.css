@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+:root {
+  --color-1: #bf5233;
+  --color-2: #35325e;
+}
+
+body {
+  background: #bcbed0;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1100px;
+  height: 100%;
+  margin: 24px 0px;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 350px;
+  padding: 50px;
+  height: 100%;
+  background: #e5e7ee;
+  border-radius: 25px 0px 0px 25px;
+}
+.left-side .profile {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+}
+.left-side .profile .profile-image {
+  width: 75px;
+  border-radius: 100%;
+}
+.left-side .profile .profile-info {
+  margin-left: 15px;
+  font-family: Lato, sans-serif;
+  color: var(--color-2);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.left-side .menu {
+  margin-top: 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.left-side .menu .menu-item {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: rgba(200, 200, 200, 0.75) solid 1px;
+  color: gray;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+}
+.left-side .menu .menu-item#active {
+  color: var(--color-2);
+}
+.left-side .menu .menu-item .logout {
+  color: red;
+}
+.main {
+  background: #fff;
+  flex: 1;
+  height: 100%;
+  min-width: 500px;
+  border-radius: 0px 25px 25px 0px;
+}
