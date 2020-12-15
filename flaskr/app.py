@@ -3,16 +3,13 @@ from models import db, User
 from forms import LoginForm, RegisterForm, SearchForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import requests
+from database import db
 
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = "MemurBeySelcuk"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///secret.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-with app.app_context():
-    db.init_app(app)
-    db.create_all()
+db.init()
 
 
 @app.route('/',  methods=['GET', 'POST'])
@@ -65,17 +62,20 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(email = form.email.data).first()
+
         hashed_password = generate_password_hash(form.password.data, method='sha256')
 
-        new_user = User(
-            name = form.name.data,
-            email = form.email.data,
-            password = hashed_password,
-            avatar = form.avatar.data)
+        new_user = {
+ 
+            'name': form.name.data,
+            'email': form.email.data,
+            'password': hashed_password,
+            'avatar': form.avatar.data
 
-        db.session.add(new_user)
-        db.session.commit()
+            }
+
+        db.insert_one('user', new_user)
+        
 
         return redirect(url_for('login'))
 
