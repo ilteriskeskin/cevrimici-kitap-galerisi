@@ -55,7 +55,7 @@ def login():
 
                 return redirect(url_for('login'))
     # rendering login page
-    return render_template('login.html', form = form)
+    return render_template('html/login.html', form = form)
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
@@ -79,7 +79,7 @@ def register():
 
         return redirect(url_for('login'))
 
-    return render_template('register.html', form=form)
+    return render_template('html/register.html', form=form)
 
 
 @app.route('/logout/')
