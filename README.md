@@ -1,6 +1,6 @@
 # Çevrimiçi kitap galerisi
 
-[kitaplar-api](https://collectapi.com/tr/api/book/kitaplar-api) ya da [Google Books API](https://developers.google.com/books/docs/overview) kullanılarak çevrimiçi kitap galerisi oluşturulacak 
+[itbook api](https://api.itbook.store/) kullanılarak çevrimiçi kitap galerisi oluşturulacak 
 
 
 **Proje Kurulumu**
@@ -19,7 +19,7 @@ Kitaplar API ücretsiz key vermektedir ancak aylık 100 istek hakkı sunmaktadı
 * Proje kullanıcıların kitapları sorgulayabildiği online bir kütüphane olacak.
 * Aradıkları kitapla ilgili detaylı bilgiler edinilebilecek.
 * API'ın sunduğu bilgileri kullanıcıya sunacak.
-* Kitabı almak isteyen olursa API'ın izin verdiği kadar epub olarak indirilebilir veya [Hattusa](hattusa.live) linkine yönlendirebilir.
+* Kitaplar favorilere eklenebilir olacak ve kitaplar için yorum sistemi eklenecek.
 
 Kalanı için issuelara bakabilirsiniz :)
 
