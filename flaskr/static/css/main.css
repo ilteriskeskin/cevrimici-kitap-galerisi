@@ -1,25 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-
 :root {
   --color-1: #bf5233;
   --color-2: #35325e;
 }
-
 body {
   background: #bcbed0;
-  background-position: center;
   display: flex;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
+  flex-direction: row;
+  margin: 30px;
 }
-
 .container {
   display: flex;
-  flex-direction: row;
-  max-width: 1100px;
-  height: 100%;
-  margin: 24px 0px;
+  width: 100%;
+  max-width: 1600px;
 }
 
 .left-side {
@@ -27,8 +22,6 @@ body {
   flex-direction: column;
   align-items: center;
   min-width: 350px;
-  padding: 50px;
-  height: 100%;
   background: #e5e7ee;
   border-radius: 25px 0px 0px 25px;
 }
@@ -36,7 +29,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  padding: 10px;
+  padding-top: 20px;
 }
 .left-side .profile .profile-image {
   width: 75px;
@@ -67,6 +60,11 @@ body {
   font-family: Lato, sans-serif;
   font-weight: bold;
 }
+.left-side .menu a {
+  display: block;
+  text-decoration: none;
+  width: 80%;
+}
 .left-side .menu .menu-item#active {
   color: var(--color-2);
 }
@@ -74,9 +72,74 @@ body {
   color: red;
 }
 .main {
+  font-family: Lato, sans-serif;
+  padding: 15px;
   background: #fff;
   flex: 1;
   height: 100%;
-  min-width: 500px;
   border-radius: 0px 25px 25px 0px;
+}
+.main .search-box {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 45px;
+}
+.main .search-box input {
+  padding: 16px;
+  border: 2px rgba(173, 173, 173, 0.5) solid;
+  border-radius: 10px;
+  flex: 1;
+}
+.main .search-box button.search-button {
+  padding: 16px;
+  color: white;
+  width: 100px;
+  height: 48px;
+  background: var(--color-2);
+  border: 0;
+  margin-left: 5px;
+  border-radius: 10px;
+}
+
+.cards {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.cards a {
+  text-decoration: none;
+  color: black;
+}
+
+.cards .card {
+  margin: 8px;
+  width: 320px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  border: 1px rgba(0, 0, 0, 0.2) solid;
+}
+.cards .card .image img {
+  width: 180px;
+  border-radius: 5px;
+}
+.cards .card .info {
+  padding-left: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.cards .card .info button.details {
+  background: var(--color-2);
+  border: 1px solid gray;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  color: white;
+  font-weight: bold;
+  width: 100%;
 }
