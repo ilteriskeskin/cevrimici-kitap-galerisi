@@ -7,7 +7,7 @@
 }
 
 body {
-  background: url("/assets/illustrations.svg");
+  background-image: url("./assets/illustrations.svg");
   background-position: center;
   display: flex;
   align-items: center;
