@@ -8,19 +8,22 @@
     </head>
     <body>
         <div class="form-box">
-            <form class="register">
+            <form class="register" method="POST">
                 <h2 class="register">Register</h2>
-                <input name="username" type="text" placeholder="Username"
-                    class="username" />
-                <input name="email" type="text"
-                    placeholder="hi@example.com"
-                    class="email" />
-
-                <input name="password" type="password" placeholder="Password"
-                    class="password" />
+                <!-- <input name="username" type="text" placeholder="Username" -->
+                    <!-- class="username" /> -->
+                <!-- <input name="email" type="text" -->
+                    <!-- placeholder="hi@example.com" -->
+                    <!-- class="email" /> -->
+<!--  -->
+                <!-- <input name="password" type="password" placeholder="Password" -->
+                    <!-- class="password" /> -->
+                {{ form.name(class="username", placeholder="Username") }}
+                {{ form.email(class="email", placeholder="hi@example.com") }}
+                {{ form.password(class="password", placeholder="password") }}
 
                 <div class="buttons">
-                    <button class="button">Register</button>
+                    <button class="button" type="submit">Register</button>
                     <button class="button">Log in</button>
                 </div>
 

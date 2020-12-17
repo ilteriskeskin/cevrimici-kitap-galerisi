@@ -32,17 +32,18 @@ def login():
     # verifying that method is post and form is valid
     if request.method == 'POST' and form.validate:
         # checking that user is exist or not by email
-        user = User.query.filter_by(email = form.email.data).first()
+        user = db.find_one('user', query={'email':form.email.data})
+        
 
         if user:
             # if user exist in database than we will compare our database hased password and password come from login form 
-            if check_password_hash(user.password, form.password.data):
+            if check_password_hash(user['password'], form.password.data):
                 # if password is matched, allow user to access and save email and username inside the session
                 flash('You have successfully logged in.', "success")
 
                 session['logged_in'] = True
 
-                session['email'] = user.email 
+                session['email'] = user['email'] 
 
             
                 # After successful login, redirecting to home page
@@ -61,8 +62,11 @@ def login():
 def register():
     form = RegisterForm()
 
-    if form.validate_on_submit():
-
+    if form.validate and request.method == 'POST':
+        user = db.find_one('user', query={'email':form.email.data})
+        if user:
+            return redirect(url_for('login'))
+        
         hashed_password = generate_password_hash(form.password.data, method='sha256')
 
         new_user = {
