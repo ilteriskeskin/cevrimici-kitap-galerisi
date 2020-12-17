@@ -8,19 +8,20 @@
     </head>
     <body>
         <div class="form-box">
-            <form class="login">
+            <form class="login" method="POST">
                 <h2 class="login">Log in</h2>
-                <input name="username" type="text" placeholder="Username"
+                <!-- <input name="username" type="text" placeholder="Username"
                     class="username" />
                 <input name="username" type="text"
                     placeholder="hi@example.com"
                     class="email" />
 
                 <input name="password" type="password" placeholder="Password"
-                    class="password" />
-
-                <div class="buttons">
-                    <button class="button">Log in</button>
+                    class="password" /> -->
+                {{ form.email(class="email", placeholder="hi@example.com") }}
+                {{ form.password(class="password", placeholder="Password") }}
+            <div class="buttons">
+                    <button class="button" type="submit">Log in</button>
                     <button class="button">Register</button>
                 </div>
                 <a class="forget-password" href="#">Forget password?</a>
