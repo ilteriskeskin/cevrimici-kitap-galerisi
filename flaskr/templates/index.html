@@ -13,7 +13,7 @@
 <hr>
 
 {% if session['logged_in'] %}
-    <h5>Welcome, {{session['username'] }}</h5>
+    <h5>Welcome, {{session['email'] }}</h5>
     <form method="POST">
         {{form.search}}
         <button type="submit">Search</button>
@@ -28,6 +28,7 @@
             Subtitle: {{ book.subtitle }}
             <br>
             <b style="color:gold">{{ book.price }}</b>
+            <a href="/fav/{{book.url[27:]}}">Add to favourites {{ book.url }}</a>
             </li>
             <br><br>
     {% endfor %}

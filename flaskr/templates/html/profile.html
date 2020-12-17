@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+    <ul>
+    
+        {% for fav in fav_books %}
+            <li>
+            <b>BookName:</b> {{ fav.title }}
+            <br>
+            Subtitle: {{ fav.subtitle }}
+            <br>
+            <b style="color:gold">{{ fav.price }}</b>
+            <br>
+            <a href="/fav/{{fav.url[27:]}}">Add to favourites {{ fav.url }}</a>
+            </li>
+            <br><br>
+    {% endfor %}
+
+    </ul>
+
+{% endblock body %}

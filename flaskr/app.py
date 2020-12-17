@@ -22,7 +22,7 @@ def home():
         r = requests.get(searchUrl + searchVariable) 
         result = r.json()
         books = result['books']
-        return render_template('index.html', form=form, books = books)
+        return render_template('index.html', form=form, books=books)
 
     return render_template('index.html', form = form)
 @app.route('/login/', methods = ['GET', 'POST'])
@@ -43,7 +43,7 @@ def login():
 
                 session['logged_in'] = True
 
-                session['email'] = user['email'] 
+                session['email'] = user['email']
 
             
                 # After successful login, redirecting to home page
@@ -90,6 +90,37 @@ def register():
 def logout():
     session['logged_in'] = False
     return redirect(url_for('home'))
+
+@app.route('/profile', methods=["GET"])
+def profile():
+    user = db.find_one("user", query={'email':session['email']})
+    book_api_url = "https://api.itbook.store/1.0/books/"
+    fav_arrays = user['favs']['favs']
+    fav_books = []
+    for number in fav_arrays:
+        last_number = number[27:]
+        r = requests.get(book_api_url + last_number)
+        fav_books.append(r.json())
+        
+    return render_template('html/profile.html', user=user, fav_books=fav_books)
+
+@app.route('/fav/<url>', methods=['GET','POST'])
+def favourite(url):
+    full_url = 'https://itbook.store/books/'+url
+    user = db.find_one("user", query={'email':session['email']})
+    if user['favs']:
+        books = user['favs']
+        books['favs'].append(full_url)
+    else:
+        books = {
+            'favs': [full_url],
+        }
+
+    db.find_and_modify('user', 
+                        query={'email':session['email']}, 
+                        favs=books)
+    return redirect(url_for('home'))
+    
 
 
 # entry point
