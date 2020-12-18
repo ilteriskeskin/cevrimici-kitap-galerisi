@@ -89,7 +89,8 @@ def register():
             'name': form.name.data,
             'email': form.email.data,
             'password': hashed_password,
-            'avatar': form.avatar.data
+            'avatar': form.avatar.data,
+            'favs':{}
 
             }
 
@@ -112,13 +113,13 @@ def logout():
 def profile():
     user = db.find_one("user", query={'email':session['email']})
     book_api_url = "https://api.itbook.store/1.0/books/"
-    fav_arrays = user['favs']['favs']
     fav_books = []
-    for number in fav_arrays:
-        last_number = number[27:]
-        r = requests.get(book_api_url + last_number)
-        fav_books.append(r.json())
-        
+    if user['favs']:
+        fav_arrays = user['favs']['favs']
+        for number in fav_arrays:
+            last_number = number[27:]
+            r = requests.get(book_api_url + last_number)
+            fav_books.append(r.json())   
     return render_template('html/profile.html', user=user, fav_books=fav_books)
 
 @app.route('/fav/<url>', methods=['GET','POST'])
