@@ -20,19 +20,20 @@ body {
 .left-side {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   min-width: 350px;
   background: #e5e7ee;
   border-radius: 25px 0px 0px 25px;
 }
 .left-side .profile {
+  width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   padding-top: 20px;
+  padding-left: 30px;
 }
 .left-side .profile .profile-image {
-  width: 75px;
+  width: 65px;
   border-radius: 100%;
 }
 .left-side .profile .profile-info {
@@ -43,7 +44,7 @@ body {
   font-size: 1.2em;
 }
 .left-side .menu {
-  margin-top: 2em;
+  margin-top: 1.2em;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -142,4 +143,12 @@ body {
   color: white;
   font-weight: bold;
   width: 100%;
+}
+.main .hero-title {
+  margin-left: 10px;
+}
+.main .section-title {
+  margin-left: 10px;
+  margin-top: 40px;
+  font-size: 1.2em;
 }
