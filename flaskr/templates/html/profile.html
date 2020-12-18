@@ -14,11 +14,11 @@
                     <img class="profile-image" src="https://i.pravatar.cc/300"
                         alt="user profile image">
                     <div class="profile-info">
-                        <p>Arthur Alvarez</p>
+                        <p>{{ user['name'] }}</p>
                     </div>
                 </div>
                 <div class="menu">
-                    <a href="">
+                    <a href="/">
                         <div class="menu-item">
                             <p class="link-title">Home</p>
                             <i class="fa fa-arrow-right"></i>
@@ -30,7 +30,7 @@
                             <i class="fa fa-arrow-right"></i>
                         </div>
                     </a>
-                    <a href="">
+                    <a href="/logout/">
                         <div class="menu-item">
                             <p class="link-title logout">Log out</p>
                             <i class="fa fa-arrow-right"></i>
@@ -45,75 +45,25 @@
                 </div>
                 <h2 class="section-title">Favorite Books ⭐</h2>
                 <div class="cards">
-                    
-                    <a href="#bookURL"></a>
+                
+                    {% for fav in fav_books %}
+
                         <div class="card">
                             <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
+                                <img src="{{ fav.image }}" alt="">
                             </div>
                             <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
+                                <h2 class="title">{{ fav.title }}</h2>
+                                <h4>{{ fav.desc }}</h4>
                                 <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
+                                    <p class="price">{{ fav.price }}</p>
+                                    <button onclick="window.location.href='{{ fav.url }}'" class="details">Detail</button>
                                 </div>
                             </div>
                         </div>
-                    </a>
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+
+                    {% endfor %}
+
                 </div>
             </div>
         </div>

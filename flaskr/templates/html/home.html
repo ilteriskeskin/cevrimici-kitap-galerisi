@@ -9,121 +9,65 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
             integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="crossorigin="anonymous"
             />
-    </head>b
+    </head>
     <body>
         <div class="container">
 
             <div class="left-side">
                 <div class="profile">
-                    <img class="profile-image" src="https://i.pravatar.cc/300"
+                    <img class="profile-image" src="{{ user.avatar }}"
                         alt="user profile image">
                     <div class="profile-info">
-                        <p>Arthur Alvarez</p>
+                        <p>{{ user['name'] }}</p>
                     </div>
                 </div>
                 <div class="menu">
-                    <a href="">
+                    
                         <div class="menu-item">
-                            <p class="link-title">Log out</p>
-                            <i class="fa fa-arrow-right"></i>
+                        <a href="/profile">
+                            <p class="link-title">Profile</p>
+                        </a>
                         </div>
                         <div class="menu-item">
-                            <p class="link-title">Log out</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                        <div class="menu-item">
-                            <p class="link-title">Log out</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                        <div class="menu-item">
-                            <p class="link-title">Log out</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                        <div class="menu-item">
-                            <p class="link-title logout">Log out</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                    </a>
+                        <a href="/logout">
+                            <p class="link-title">Logout</p>
+                        </a>
+                        </div>                 
                 </div>
             </div>
             <div class="main">
-                <div class="search-box">
-                    <input type="text" placeholder="Search..">
-                    <button class="search-button">
-                        Ara
-                    </button>
-                </div>
-                <div class="cards">
+                <form method="POST">
+                    <div class="search-box">                  
+                        {{form.search(placeholder="Search", type="text")}}
+                        <button class="search-button" type="submit">Search</button>                      
+                    </div>
+                </form>
 
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
+                {% if books %}
+                    
+                    <div class="cards">
+                        {% for book in books %}
+                            <div class="card">
+                                <div class="image">
+                                    <img src="{{ book.image }}" alt="">
+                                </div>
+                                <div class="info">
+                                    <h2 class="title">{{ book.title }}</h2>
+                                    <h4>{{ book.subtitle }}</h4>
+                                    <div>
+                                        <p class="price">{{ book.price }}</p>
+                                        <button onclick="window.location.href='{{ book.url }}'" class="details">Detail</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#bookURL">
-                        <div class="card">
-                            <div class="image">
-                                <img src="https://picsum.photos/200/300"
-                                    alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">Book Name</h2>
-                                <h4>A Hands-On Guide to the Fundamentals of
-                                    JavaScript</h4>
-                                <div>
-                                    <p class="price">$12.6</p>
-                                    <button class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        {% endfor %}
+                    </div>
+                    
+                {% elif searchVariable %}
+                    There is no book called {{ searchVariable }}
+
+                {% endif %}
+
             </div>
         </div>
     </body>
