@@ -57,6 +57,7 @@
                                     <div>
                                         <p class="price">{{ book.price }}</p>
                                         <button onclick="window.location.href='{{ book.url }}'" class="details">Detail</button>
+                                        <button onclick="window.location.href='/fav/{{ book.url[27:] }}'" class="details">Add to Favs</button>
                                     </div>
                                 </div>
                             </div>
