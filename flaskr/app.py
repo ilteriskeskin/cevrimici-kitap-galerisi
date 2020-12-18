@@ -1,9 +1,9 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, json, jsonify
-from models import db, User
 from forms import LoginForm, RegisterForm, SearchForm
 from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 from database import db
+from functools import wraps
 
 app = Flask(__name__)
 
@@ -12,19 +12,33 @@ app.config['SECRET_KEY'] = "MemurBeySelcuk"
 db.init()
 
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Bu sayfayı görüntülemek için lütfen giriş yapın.', 'danger')
+            return redirect(url_for('login'))
+
+    return decorated_function
+
+
 @app.route('/',  methods=['GET', 'POST'])
+@login_required
 def home():
     form = SearchForm()
+    user = db.find_one('user', query={'email':session['email']})
     if request.method == "POST":
         searchVariable = form.search.data
         searchUrl = 'https://api.itbook.store/1.0/search/'
-        
         r = requests.get(searchUrl + searchVariable) 
         result = r.json()
         books = result['books']
-        return render_template('index.html', form=form, books=books)
+        return render_template('html/home.html', form=form, books=books, searchVariable=searchVariable, user=user)
 
-    return render_template('index.html', form = form)
+    return render_template('html/home.html', form = form, user=user)
+
 @app.route('/login/', methods = ['GET', 'POST'])
 def login():
     # Creating Login form object
@@ -44,6 +58,7 @@ def login():
                 session['logged_in'] = True
 
                 session['email'] = user['email']
+                
 
             
                 # After successful login, redirecting to home page
@@ -87,11 +102,13 @@ def register():
 
 
 @app.route('/logout/')
+@login_required
 def logout():
-    session['logged_in'] = False
+    session.clear()
     return redirect(url_for('home'))
 
 @app.route('/profile', methods=["GET"])
+@login_required
 def profile():
     user = db.find_one("user", query={'email':session['email']})
     book_api_url = "https://api.itbook.store/1.0/books/"
@@ -105,6 +122,7 @@ def profile():
     return render_template('html/profile.html', user=user, fav_books=fav_books)
 
 @app.route('/fav/<url>', methods=['GET','POST'])
+@login_required
 def favourite(url):
     full_url = 'https://itbook.store/books/'+url
     user = db.find_one("user", query={'email':session['email']})
