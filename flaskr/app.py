@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 from database import db
 from functools import wraps
+from apis import Apis
 
 app = Flask(__name__)
 
@@ -31,9 +32,7 @@ def home():
     user = db.find_one('user', query={'email':session['email']})
     if request.method == "POST":
         searchVariable = form.search.data
-        searchUrl = 'https://api.itbook.store/1.0/search/'
-        r = requests.get(searchUrl + searchVariable) 
-        result = r.json()
+        result = Apis.search_api(search_variable=searchVariable)
         books = result['books']
         return render_template('html/home.html', form=form, books=books, searchVariable=searchVariable, user=user)
 
@@ -56,10 +55,7 @@ def login():
                 flash('You have successfully logged in.', "success")
 
                 session['logged_in'] = True
-
                 session['email'] = user['email']
-                
-
             
                 # After successful login, redirecting to home page
                 return redirect(url_for('home'))
@@ -112,13 +108,12 @@ def logout():
 @login_required
 def profile():
     user = db.find_one("user", query={'email':session['email']})
-    book_api_url = "https://api.itbook.store/1.0/books/"
     fav_books = []
     if user['favs']:
         fav_arrays = user['favs']['favs']
         for number in fav_arrays:
             last_number = number[27:]
-            r = requests.get(book_api_url + last_number)
+            r = Apis.numeric_search(last_number)
             fav_books.append(r.json())   
     return render_template('html/profile.html', user=user, fav_books=fav_books)
 
