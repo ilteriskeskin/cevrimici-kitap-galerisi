@@ -59,6 +59,7 @@
                                 <h4>{{ fav.desc }}</h4>
                                 <div>
                                     <p class="price">{{ fav.price }}</p>
+                                    <button onclick="window.location.href='/unfavorite/{{ fav.url[27:] }}'" class="details">Remove from Favourites</button>
                                     <button onclick="window.location.href='{{ fav.url }}'" class="details">Detail</button>
                                 </div>
                             </div>
