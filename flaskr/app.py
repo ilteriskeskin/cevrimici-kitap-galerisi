@@ -122,17 +122,23 @@ def profile():
 def favourite(url):
     full_url = 'https://itbook.store/books/'+url
     user = db.find_one("user", query={'email':session['email']})
-    if user['favs']:
-        books = user['favs']
-        books['favs'].append(full_url)
+
+    if user['favs']['favs']:
+        for i in user['favs']['favs']:
+            if i == full_url:
+                break
+            else:
+                books = user['favs']
+                books['favs'].append(full_url) 
+                db.find_and_modify('user', 
+                        query={'email':session['email']}, favs=books)          
     else:
         books = {
-            'favs': [full_url],
+            'favs': [full_url]
         }
 
-    db.find_and_modify('user', 
-                        query={'email':session['email']}, 
-                        favs=books)
+        db.find_and_modify('user', 
+                            query={'email':session['email']}, favs=books)
     return redirect(url_for('home'))
 
 @app.route('/unfavorite/<url>', methods=['GET','POST'])
