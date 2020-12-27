@@ -36,7 +36,7 @@ def home():
         books = result['books']
         return render_template('html/home.html', form=form, books=books, searchVariable=searchVariable, user=user)
 
-    return render_template('html/home.html', form = form, user=user)
+    return render_template('html/home.html', form = form, user=user, title='Ana Sayfa')
 
 @app.route('/login/', methods = ['GET', 'POST'])
 def login():
@@ -46,17 +46,17 @@ def login():
     if request.method == 'POST' and form.validate:
         # checking that user is exist or not by email
         user = db.find_one('user', query={'email':form.email.data})
-        
+
 
         if user:
-            # if user exist in database than we will compare our database hased password and password come from login form 
+            # if user exist in database than we will compare our database hased password and password come from login form
             if check_password_hash(user['password'], form.password.data):
                 # if password is matched, allow user to access and save email and username inside the session
                 flash('You have successfully logged in.', "success")
 
                 session['logged_in'] = True
                 session['email'] = user['email']
-            
+
                 # After successful login, redirecting to home page
                 return redirect(url_for('home'))
 
@@ -77,11 +77,11 @@ def register():
         user = db.find_one('user', query={'email':form.email.data})
         if user:
             return redirect(url_for('login'))
-        
+
         hashed_password = generate_password_hash(form.password.data, method='sha256')
 
         new_user = {
- 
+
             'name': form.name.data,
             'email': form.email.data,
             'password': hashed_password,
@@ -91,7 +91,7 @@ def register():
             }
 
         db.insert_one('user', new_user)
-        
+
 
         return redirect(url_for('login'))
 
@@ -114,8 +114,8 @@ def profile():
         for number in fav_arrays:
             last_number = number[27:]
             r = Apis.numeric_search(last_number)
-            fav_books.append(r.json())   
-    return render_template('html/profile.html', user=user, fav_books=fav_books)
+            fav_books.append(r.json())
+    return render_template('html/profile.html', user=user, fav_books=fav_books, title='Profil')
 
 @app.route('/fav/<url>', methods=['GET','POST'])
 @login_required
@@ -129,15 +129,15 @@ def favourite(url):
                 break
             else:
                 books = user['favs']
-                books['favs'].append(full_url) 
-                db.find_and_modify('user', 
-                        query={'email':session['email']}, favs=books)          
+                books['favs'].append(full_url)
+                db.find_and_modify('user',
+                        query={'email':session['email']}, favs=books)
     else:
         books = {
             'favs': [full_url]
         }
 
-        db.find_and_modify('user', 
+        db.find_and_modify('user',
                             query={'email':session['email']}, favs=books)
     return redirect(url_for('home'))
 
@@ -149,8 +149,8 @@ def unfavorite(url):
     if user['favs']:
         books = user['favs']
         books['favs'].remove(full_url)
-        db.find_and_modify('user', 
-                        query={'email':session['email']}, 
+        db.find_and_modify('user',
+                        query={'email':session['email']},
                         favs=books)
     return redirect(url_for('profile'))
 
