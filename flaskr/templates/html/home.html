@@ -1,75 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Home</title>
-        <link rel="stylesheet" href="../../static/css/main.css">
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-            integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="crossorigin="anonymous"
-            />
-    </head>
-    <body>
-        <div class="container">
+{% extends "base.html" %}
 
-            <div class="left-side">
-                <div class="profile">
-                    <img class="profile-image" src="{{ user.avatar }}"
-                        alt="user profile image">
-                    <div class="profile-info">
-                        <p>{{ user['name'] }}</p>
-                    </div>
-                </div>
-                <div class="menu">
-                    
-                        <div class="menu-item">
-                        <a href="/profile">
-                            <p class="link-title">Profile</p>
-                        </a>
-                        </div>
-                        <div class="menu-item">
-                        <a href="/logout">
-                            <p class="link-title">Logout</p>
-                        </a>
-                        </div>                 
-                </div>
-            </div>
-            <div class="main">
-                <form method="POST">
-                    <div class="search-box">                  
-                        {{ form.search(placeholder="Search", type="text") }}
-                        <button class="search-button" type="submit">Search</button>                      
-                    </div>
-                </form>
+{% block body %}
 
-                {% if books %}
-                    
-                    <div class="cards">
-                        {% for book in books %}
-                            <div class="card">
-                                <div class="image">
-                                    <img src="{{ book.image }}" alt="">
-                                </div>
-                                <div class="info">
-                                    <h2 class="title">{{ book.title }}</h2>
-                                    <h4>{{ book.subtitle }}</h4>
-                                    <div>
-                                        <p class="price">{{ book.price }}</p>
-                                        <button onclick="window.location.href='{{ book.url }}'" class="details">Detail</button>
-                                        <button onclick="window.location.href='/fav/{{ book.url[27:] }}'" class="details">Add to Favs</button>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    
-                {% elif searchVariable %}
-                    There is no book called {{ searchVariable }}
-
-                {% endif %}
-
-            </div>
+<div class="main">
+    <form method="POST">
+        <div class="search-box">
+            {{ form.search(placeholder="Search", type="text") }}
+            <button class="search-button" type="submit">Search</button>
         </div>
-    </body>
-</html>
+    </form>
+
+    {% if books %}
+
+        <div class="cards">
+            {% for book in books %}
+                <div class="card">
+                    <div class="image">
+                        <img src="{{ book.image }}" alt="">
+                    </div>
+                    <div class="info">
+                        <h2 class="title">{{ book.title }}</h2>
+                        <h4>{{ book.subtitle }}</h4>
+                        <div>
+                            <p class="price">{{ book.price }}</p>
+                            <button onclick="window.location.href='{{ book.url }}'" class="details">Detail</button>
+                            <button onclick="window.location.href='/fav/{{ book.url[27:] }}'" class="details">Add to Favs</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    {% elif searchVariable %}
+        There is no book called {{ searchVariable }}
+
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,76 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profile</title>
-        <link rel="stylesheet"
-            href="../../static/css/main.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="left-side">
-                <div class="profile">
-                    <img class="profile-image" src="{{ user.avatar }}"
-                        alt="user profile image">
-                    <div class="profile-info">
-                        <p>{{ user['name'] }}</p>
-                    </div>
-                </div>
-                <div class="menu">
-                    <a href="/">
-                        <div class="menu-item">
-                            <p class="link-title">Home</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="menu-item">
-                            <p class="link-title">Settings</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                    </a>
-                    <a href="/logout/">
-                        <div class="menu-item">
-                            <p class="link-title logout">Log out</p>
-                            <i class="fa fa-arrow-right"></i>
-                        </div>
-                    </a>
+{% extends "base.html" %}
 
-                </div>
+{% block body %}
+<div class="main">
+    <div class="hero-title">
+        <h2>Profile</h2>
+    </div>
+    <h2 class="section-title">Favorite Books ⭐</h2>
+    <div class="cards">
+
+        {% if fav_books %}
+
+        {% for fav in fav_books %}
+
+        <div class="card">
+            <div class="image">
+                <img src="{{ fav.image }}" alt="">
             </div>
-            <div class="main">
-                <div class="hero-title">
-                    <h2>Profile</h2>
-                </div>
-                <h2 class="section-title">Favorite Books ⭐</h2>
-                <div class="cards">
-
-                {% if fav_books %}
-                   
-                    {% for fav in fav_books %}
-
-                        <div class="card">
-                            <div class="image">
-                                <img src="{{ fav.image }}" alt="">
-                            </div>
-                            <div class="info">
-                                <h2 class="title">{{ fav.title }}</h2>
-                                <h4>{{ fav.desc }}</h4>
-                                <div>
-                                    <p class="price">{{ fav.price }}</p>
-                                    <button onclick="window.location.href='/unfavorite/{{ fav.url[27:] }}'" class="details">Remove from Favourites</button>
-                                    <button onclick="window.location.href='{{ fav.url }}'" class="details">Detail</button>
-                                </div>
-                            </div>
-                        </div>
-
-                    {% endfor %}
-
-                {% endif %}
-
+            <div class="info">
+                <h2 class="title">{{ fav.title }}</h2>
+                <h4>{{ fav.desc }}</h4>
+                <div>
+                    <p class="price">{{ fav.price }}</p>
+                    <button onclick="window.location.href='/unfavorite/{{ fav.url[27:] }}'" class="details">Remove from Favourites</button>
+                    <button onclick="window.location.href='{{ fav.url }}'" class="details">Detail</button>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

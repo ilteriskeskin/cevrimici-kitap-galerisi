@@ -1,0 +1,30 @@
+<div class="left-side">
+    <div class="profile">
+        <img class="profile-image" src="{{ user.avatar }}"
+            alt="user profile image">
+        <div class="profile-info">
+            <p>{{ user['name'] }}</p>
+        </div>
+    </div>
+    <div class="menu">
+        <a href="{{ url_for('home') }}">
+            <div class="menu-item">
+                <p class="link-title">Home</p>
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        </a>
+        <a href="{{ url_for('profile') }}">
+            <div class="menu-item">
+                <p class="link-title">Profile</p>
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        </a>
+        <a href="{{ url_for('logout') }}">
+            <div class="menu-item">
+                <p class="link-title logout">Log out</p>
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        </a>
+
+    </div>
+</div>
