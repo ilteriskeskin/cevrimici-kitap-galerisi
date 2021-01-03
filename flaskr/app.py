@@ -122,9 +122,9 @@ def profile():
 def favourite(url):
     full_url = 'https://itbook.store/books/'+url
     user = db.find_one("user", query={'email':session['email']})
-
-    if user['favs']['favs']:
-        for i in user['favs']['favs']:
+    #import ipdb; ipdb.set_trace()
+    if user['favs']:
+        for i in user['favs']:
             if i == full_url:
                 break
             else:
